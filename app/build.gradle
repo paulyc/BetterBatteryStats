@@ -25,13 +25,16 @@ android {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 98
+//        minSdkVersion 28
+//        targetSdkVersion 28
         versionName "2.5"
-        versionNameSuffix = getBuildSuffix()
+        versionNameSuffix = kotlin_version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
         testBuildType "debug"
         vectorDrawables.useSupportLibrary = true
         manifestPlaceholders = [HOCKEYAPP_APP_ID: System.getenv("HOCKEYAPP_APP_ID") ?: "xx-xx-xxxx"]
+        applicationIdSuffix = 'paulyc'
 
 
     }
@@ -57,6 +60,12 @@ android {
             dimension "edition"
             applicationId "com.asksven.betterbatterystats"
             signingConfig signingConfigs.release
+            applicationIdSuffix = 'paulyc'
+            versionCode = 71200
+            versionName = 'paulyc'
+            versionNameSuffix = '071200'
+            targetSdkVersion 28
+            minSdkVersion 28
 //            playAccountConfig = playAccountConfigs.defaultAccountConfig
 
 
@@ -65,6 +74,12 @@ android {
             dimension "edition"
             applicationId "com.asksven.betterbatterystats_xdaedition"
             signingConfig signingConfigs.debug
+            targetSdkVersion 28
+            minSdkVersion 28
+            applicationIdSuffix = 'paulyc'
+            versionCode = 71200
+            versionName = 'paulyc'
+            versionNameSuffix = '071200'
         }
     }
 
@@ -118,13 +133,18 @@ android {
         disable 'MissingTranslation'
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
+    }
+    buildToolsVersion = '29.0.0'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // for local tests (app/src/test)
     // Required for instrumented tests (app/src/androidTest)
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
@@ -133,20 +153,20 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'de.cketti.library.changelog:ckchangelog:1.2.2'
     implementation 'com.google.android.apps.dashclock:dashclock-api:2.0.0'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.codehaus.jackson:jackson-core-asl:1.9.13'
     implementation 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
     implementation 'com.android.support:design:28.0.0'
     implementation group:'com.twofortyfouram', name:'android-plugin-client-sdk-for-locale', version:'[4.0.3, 5.0['
     implementation 'com.android.support:support-vector-drawable:28.0.0'
-    implementation 'net.hockeyapp.android:HockeySDK:5.1.0'
+    implementation 'net.hockeyapp.android:HockeySDK:5.2.0'
     implementation 'com.android.support:support-compat:28.0.0'
-    implementation 'org.influxdb:influxdb-java:2.5'
+    implementation 'org.influxdb:influxdb-java:2.15'
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.powermock:powermock-api-mockito:1.6.5'
-    testImplementation 'org.powermock:powermock-module-junit4-rule-agent:1.6.5'
-    testImplementation 'org.powermock:powermock-module-junit4-rule:1.6.5'
-    testImplementation 'org.powermock:powermock-module-junit4:1.6.5'
+    testImplementation 'org.powermock:powermock-api-mockito:1.7.4'
+    testImplementation 'org.powermock:powermock-module-junit4-rule-agent:2.0.2'
+    testImplementation 'org.powermock:powermock-module-junit4-rule:2.0.2'
+    testImplementation 'org.powermock:powermock-module-junit4:2.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
